@@ -1,0 +1,3 @@
+1 Ivan Berezov 70000
+2 Alexey Smirnov 80000
+3 Andrey Ivanov 75000

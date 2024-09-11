@@ -1,0 +1,5 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (OOP_lab1.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  Employee.cpp
+C:\Users\savos\OneDrive\Рабочий стол\Университет\ООП\Лабы\Лаб1\Employee.cpp(78,11): warning C4101: salary: неиспользованная локальная переменная
+C:\Users\savos\OneDrive\Рабочий стол\Университет\ООП\Лабы\Лаб1\Employee.cpp(78,7): warning C4101: id: неиспользованная локальная переменная
+  OOP_lab1_Savostianov.vcxproj -> C:\Users\savos\OneDrive\Рабочий стол\Университет\ООП\Лабы\Лаб1\x64\Debug\OOP_lab1_Savostianov.exe
