@@ -1,0 +1,5 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (OOP_lab1.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  Department.cpp
+D:\cpp_projects\OOP_labs\Лаб1\Department.cpp(5,129): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+D:\cpp_projects\OOP_labs\Лаб1\Department.cpp(85,35): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+  OOP_lab1_Savostianov.vcxproj -> D:\cpp_projects\OOP_labs\Лаб1\x64\Debug\OOP_lab1_Savostianov.exe

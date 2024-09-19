@@ -1,0 +1,2 @@
+C:\Users\savos\OneDrive\Рабочий стол\Университет\ООП\Лабы\Лаб1\x64\Debug\OOP_lab1_Savostianov.exe
+D:\cpp_projects\OOP_labs\Лаб1\x64\Debug\OOP_lab1_Savostianov.exe
