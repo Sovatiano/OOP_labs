@@ -13,12 +13,12 @@ private:
 public:
 
     ~Department() {
-        clearEmployees();  // Освобождаем память и очищаем контейнер
+        clearEmployees();
     }
 
-    void addEmployee(const Employee& employee);
+    void addEmployee();
 
-    bool removeEmployee(int employeeID);
+    bool removeEmployee();
 
     void clearEmployees();
 

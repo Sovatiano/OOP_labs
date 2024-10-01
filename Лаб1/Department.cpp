@@ -1,20 +1,38 @@
 #include "Department.h"
+#include "BooleanFuncs.h"
 
 
-void Department::addEmployee(const Employee& employee) {
-    Employee* emp_pointer = new Employee(employee.getEmployeeID(), employee.getName(), employee.getSurname(), employee.getSalary());
+void Department::addEmployee() {
+    Employee new_emp;
+    Employee* emp_pointer = new Employee;
+    *emp_pointer = new_emp.CreateEmployee();
     employees.push_back(emp_pointer);
 }
 
 
-bool Department::removeEmployee(int employeeID) {
+bool Department::removeEmployee() {
+    string employeeID;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    while (true) {
+        cout << "Введите ID сотрудника: ";
+        getline(cin, employeeID);
+        if (isInteger(employeeID) && stoi(employeeID) > 0) {
+            break;
+        }
+        else {
+            cout << "Неверный ввод. Введите положительное целое число." << endl;
+        }
+    }
+
     for (auto it = employees.begin(); it != employees.end(); ++it) {
-        if ((*it)->getEmployeeID() == employeeID) {
+        if ((*it)->getEmployeeID() == stoi(employeeID)) {
             delete* it;
             employees.erase(it);
+            cout << "Сотрудник успешно удалён" << endl;
             return true;
         }
     }
+    cout << "Не удалось найти сотрудника с таким id" << endl;
     return false;
 }
 
@@ -58,7 +76,6 @@ void Department::loadFromFile() {
     std::string file_name;
     std::ifstream fin;
 
-    // Сброс ввода и очистка
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cin.clear();
 
@@ -76,17 +93,17 @@ void Department::loadFromFile() {
     if (fin.is_open()) {
         clearEmployees();
 
-        Employee temp_emp = temp_emp.ReadFromFile(fin);
-        while (temp_emp.getEmployeeID() != -1) {
-            Employee* new_emp_pointer = new Employee(
-                temp_emp.getEmployeeID(),
-                temp_emp.getName(),
-                temp_emp.getSurname(),
-                temp_emp.getSalary()
-            );
+        while (!fin.eof()) {
+            Employee* new_emp_pointer = new Employee;
+            *new_emp_pointer = Employee().ReadFromFile(fin);
 
-            employees.push_back(new_emp_pointer);
-            temp_emp = temp_emp.ReadFromFile(fin);
+            if (new_emp_pointer->getEmployeeID() != -1) {
+                employees.push_back(new_emp_pointer);
+            }
+            else {
+                delete new_emp_pointer;
+                break;
+            }
         }
 
         fin.close();

@@ -14,8 +14,10 @@ class Employee
 		int salary;
 
 	public:
-		Employee(int employeeID, string name, string surname, int salary)
+		Employee(int employeeID=0, string name="", string surname="", int salary=0)
 			: employeeID(employeeID), name(name), surname(surname), salary(salary) {}
+
+		~Employee() {}
 
 
 		int getEmployeeID() const { return employeeID; }
