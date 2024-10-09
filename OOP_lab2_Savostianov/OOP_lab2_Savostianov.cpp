@@ -1,6 +1,6 @@
 ﻿#include <iostream>
-#include "Department.h"
 #include "Employee_Savostianov.h"
+#include "Department_Savostianov.h"
 #include "BooleanFuncs.h"
 #define NOMINMAX
 #include <Windows.h>
@@ -41,33 +41,13 @@ int main()
 		{
 		case 1:
 		{
-			Employee new_employee = new_employee.CreateEmployee();
-			department.addEmployee(new_employee);
+			department.addEmployee();
 			break;
 		}
 
 		case 2:
 		{
-			string employeeID;
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			while (true) {
-				cout << "Введите ID сотрудника: ";
-				getline(cin, employeeID);
-				if (isInteger(employeeID) && stoi(employeeID) > 0) {
-					break;
-				}
-				else {
-					cout << "Неверный ввод. Введите положительное целое число." << endl;
-				}
-			}
-
-			if (department.removeEmployee(stoi(employeeID))) {
-				cout << "Сотрудник успешно удалён." << endl;
-			}
-			else {
-				cout << "Не удалось найти сотрудника с заданным ID." << endl;
-			}
-
+			department.removeEmployee();
 			break;
 		}
 

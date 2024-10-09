@@ -75,8 +75,7 @@ vector<string> split(const string& s, char delim) {
 Employee Employee::ReadFromFile(ifstream& fin) {
 	Employee emp(-1, "", "", 0);
 	if (fin.is_open()) {
-		int id, salary;
-		string name, surname, cur_string;
+		string cur_string;
 		getline(fin, cur_string);
 		vector<string> elements = split(cur_string, ' ');
 		if (elements.size() == 4) {

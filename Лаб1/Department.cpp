@@ -3,9 +3,8 @@
 
 
 void Department::addEmployee() {
-    Employee new_emp;
     Employee* emp_pointer = new Employee;
-    *emp_pointer = new_emp.CreateEmployee();
+    *emp_pointer = Employee().CreateEmployee();
     employees.push_back(emp_pointer);
 }
 
@@ -91,7 +90,6 @@ void Department::loadFromFile() {
     }
 
     if (fin.is_open()) {
-        clearEmployees();
 
         while (!fin.eof()) {
             Employee* new_emp_pointer = new Employee;

@@ -3,7 +3,7 @@
 
 
 void Department::addEmployee() {
-    shared_ptr<Employee> new_ptr{ make_shared<Employee>(Employee().CreateEmployee());
+    shared_ptr<Employee> new_ptr{ make_shared<Employee>(Employee().CreateEmployee()) };
     employees.push_back(new_ptr);
 }
 
@@ -24,7 +24,6 @@ bool Department::removeEmployee() {
 
     for (auto it = employees.begin(); it != employees.end(); ++it) {
         if ((*it)->getEmployeeID() == stoi(employeeID)) {
-            delete* it;
             employees.erase(it);
             cout << "Сотрудник успешно удалён" << endl;
             return true;
@@ -36,9 +35,6 @@ bool Department::removeEmployee() {
 
 
 void Department::clearEmployees() {
-    for (auto& employee : employees) {
-        delete employee;
-    }
     employees.clear();
 }
 
@@ -92,15 +88,10 @@ void Department::loadFromFile() {
         clearEmployees();
 
         while (!fin.eof()) {
-            Employee* new_emp_pointer = new Employee;
-            *new_emp_pointer = Employee().ReadFromFile(fin);
 
-            if (new_emp_pointer->getEmployeeID() != -1) {
-                employees.push_back(new_emp_pointer);
-            }
-            else {
-                delete new_emp_pointer;
-                break;
+            shared_ptr<Employee> new_ptr{ make_shared<Employee>(Employee().ReadFromFile(fin)) };
+            if (new_ptr->getEmployeeID() != -1) {
+                employees.push_back(new_ptr);
             }
         }
 
