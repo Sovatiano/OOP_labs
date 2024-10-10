@@ -2,9 +2,15 @@
 #include "BooleanFuncs.h"
 
 
-void Department::addEmployee() {
-    shared_ptr<Employee> new_ptr{ make_shared<Employee>(Employee().CreateEmployee()) };
-    employees.push_back(new_ptr);
+void Department::addEmployee(bool is_manager) {
+    if (is_manager) {
+        shared_ptr<Manager> new_ptr{ make_shared<Manager>(Manager().CreateManager()) };
+        employees.push_back(new_ptr);
+    }
+    else {
+        shared_ptr<Employee> new_ptr{ make_shared<Employee>(Employee().CreateEmployee()) };
+        employees.push_back(new_ptr);
+    }
 }
 
 

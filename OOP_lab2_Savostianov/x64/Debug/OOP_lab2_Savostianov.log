@@ -1,2 +1,8 @@
-﻿  OOP_lab2_Savostianov.cpp
+﻿  Department_Savostianov.cpp
+  Employee_Savostianov.cpp
+C:\Users\savos\OneDrive\Рабочий стол\Университет\ООП\Лабы\OOP_lab2_Savostianov\Employee_Savostianov.cpp(78,11): warning C4101: salary: неиспользованная локальная переменная
+C:\Users\savos\OneDrive\Рабочий стол\Университет\ООП\Лабы\OOP_lab2_Savostianov\Employee_Savostianov.cpp(78,7): warning C4101: id: неиспользованная локальная переменная
+C:\Users\savos\OneDrive\Рабочий стол\Университет\ООП\Лабы\OOP_lab2_Savostianov\Employee_Savostianov.cpp(122,41): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+  OOP_lab2_Savostianov.cpp
+  Создание кода...
   OOP_lab2_Savostianov.vcxproj -> C:\Users\savos\OneDrive\Рабочий стол\Университет\ООП\Лабы\OOP_lab2_Savostianov\x64\Debug\OOP_lab2_Savostianov.exe

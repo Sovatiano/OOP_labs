@@ -9,11 +9,12 @@
 void ShowMenu()
 {
 	cout << "1. Добавить сотрудника" << "\n"
-		<< "2. Удалить сотрудника" << "\n"
-		<< "3. Показать список сотрудников" << "\n"
-		<< "4. Считать список из файла" << "\n"
-		<< "5. Сохранить список в файл" << "\n"
-		<< "6. Очистить список" << "\n"
+		<< "2. Добавить менеджера" << "\n"
+		<< "3. Удалить сотрудника" << "\n"
+		<< "4. Показать список сотрудников" << "\n"
+		<< "5. Считать список из файла" << "\n"
+		<< "6. Сохранить список в файл" << "\n"
+		<< "7. Очистить список" << "\n"
 		<< "0. Выход" << "\n";
 }
 
@@ -41,36 +42,42 @@ int main()
 		{
 		case 1:
 		{
-			department.addEmployee();
+			department.addEmployee(false);
 			break;
 		}
 
 		case 2:
 		{
-			department.removeEmployee();
+			department.addEmployee(true);
 			break;
 		}
 
 		case 3:
 		{
-			department.showEmployees();
+			department.removeEmployee();
 			break;
 		}
 
 		case 4:
+		{
+			department.showEmployees();
+			break;
+		}
+
+		case 5:
 		{
 			department.loadFromFile();
 			break;
 		}
 
 
-		case 5:
+		case 6:
 		{
 			department.saveToFile();
 			break;
 		}
 
-		case 6: {
+		case 7: {
 			department.clearEmployees();
 			break;
 		}

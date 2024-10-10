@@ -96,3 +96,38 @@ void Employee::WriteToFile(ofstream& fout) const {
 }
 
 
+Manager Manager::CreateManager() {
+	string department;
+	string employees_num;
+	Employee new_emp = Employee::CreateEmployee();
+
+	cout << "Введите название отдела, в котром работает менеджер: ";
+	getline(cin, department);
+
+	while (true) {
+		cout << "Введите количество подчинённых менеджера: ";
+		getline(cin, employees_num);
+		if (isInteger(employees_num) && stoi(employees_num) > 0) {
+			break;
+		}
+		else {
+			cout << "Неверный ввод. Введите положительное целое число." << endl;
+		}
+	}
+
+	Manager new_manager;
+	new_manager.setEmployeeID(new_emp.getEmployeeID());
+	new_manager.setName(new_emp.getName());
+	new_manager.setSurname(new_emp.getSurname());
+	new_manager.setSalary(new_emp.getSalary());
+	new_manager.setDepartment(department);
+	new_manager.setEmpnum(stoi(employees_num));
+
+	return new_manager;
+}
+
+void Manager::ShowInfo() const {
+	Employee::ShowInfo();
+	cout << "Отдел: " << department << ", "
+		<< "Количество подчинённых: " << employees_num << endl;
+}

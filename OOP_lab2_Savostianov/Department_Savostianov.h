@@ -17,7 +17,7 @@ public:
         clearEmployees();
     }
 
-    void addEmployee();
+    void addEmployee(bool is_manager);
 
     bool removeEmployee();
 

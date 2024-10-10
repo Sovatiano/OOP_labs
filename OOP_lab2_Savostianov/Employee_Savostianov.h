@@ -30,9 +30,32 @@ public:
 	void setSurname(const string& s) { surname = s; }
 	void setSalary(int sal) { salary = sal; }
 
-	Employee CreateEmployee();
-	void ShowInfo() const;
+	virtual Employee CreateEmployee();
+	virtual void ShowInfo() const;
 
 	Employee ReadFromFile(ifstream& fin);
 	void WriteToFile(ofstream& fout) const;
+};
+
+
+class Manager : public Employee {
+private:
+	string department;
+	int employees_num;
+
+public:
+
+	Manager(int employeeID = 0, string name = "", string surname = "", int salary = 0, string department = "", int employees_num = 0) :
+		Employee(employeeID, name, surname, salary) {
+		this->department = department;
+		this->employees_num = employees_num;
+	}
+
+	Manager CreateManager();
+	void ShowInfo() const;
+	void setDepartment(string dep) { department = dep; }
+	void setEmpnum(int emp_num) { employees_num = emp_num; }
+
+	string getDepartment() const { return department; }
+	double getEmpnum() const { return employees_num; }
 };
