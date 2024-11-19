@@ -1,0 +1,9 @@
+22 serialization::archive 20 0 1 1 1 0
+0 1 4 Иван 6 Иванов 10000
+22 serialization::archive 20 0 1 1 1 0
+0 2 6 Сергей 7 Сергеев 20000
+22 serialization::archive 20 0 1 1 1 0
+0 1 0
+1 3 4 Пётр 6 Петров 40000 9 Логистики 3
+22 serialization::archive 20 0 1 1 1 0
+0 4 6 Максим 8 Максимов 30000
