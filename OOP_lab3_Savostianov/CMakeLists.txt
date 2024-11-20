@@ -34,7 +34,7 @@ install(TARGETS OOP_lab3_Savostianov
 
 # Boost configuration
 if(NOT DEFINED BOOST_ROOT)
-    set(BOOST_ROOT $ENV{BOOST_ROOT})
+    set(BOOST_ROOT "D:/cpp_libs/boost_1_86_0")
 endif()
 
 set(Boost_USE_MULTITHREADED ON)
