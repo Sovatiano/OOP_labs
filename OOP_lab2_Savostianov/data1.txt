@@ -1,9 +1,0 @@
-22 serialization::archive 20 0 1 1 1 0
-0 1 4 Иван 6 Иванов 60000
-22 serialization::archive 20 0 1 1 1 0
-0 2 6 Сергей 7 Сергеев 60000
-22 serialization::archive 20 0 1 1 1 0
-0 3 5 Антон 7 Антонов 60000
-22 serialization::archive 20 0 1 1 1 0
-0 1 0
-1 4 6 Максим 8 Максимов 80000 12 Планирования 3

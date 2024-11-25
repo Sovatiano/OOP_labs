@@ -1,3 +1,5 @@
+#ifndef EMPLOYEE_SAVOSTIANOV_H
+#define EMPLOYEE_SAVOSTIANOV_H
 #pragma once
 #include <string>
 #include <fstream>
@@ -11,7 +13,7 @@
 #include <QSize>
 
 
-class Employee
+class Employee_Savostianov
 {
 	friend class boost::serialization::access;
 private:
@@ -28,11 +30,13 @@ private:
     std::string surname;
 	int salary;
 
+
+
 public:
-    Employee(int employeeID = -1, std::string name = "", std::string surname = "", int salary = 0)
+    Employee_Savostianov(int employeeID = -1, std::string name = "", std::string surname = "", int salary = 0)
 		: employeeID(employeeID), name(name), surname(surname), salary(salary) {}
 
-	~Employee() {}
+    ~Employee_Savostianov() {}
 
 
 	int getEmployeeID() const { return employeeID; }
@@ -45,11 +49,11 @@ public:
     void setSurname(const std::string& s) { surname = s; }
 	void setSalary(int sal) { salary = sal; }
 
-	virtual Employee CreateEmployee();
+    virtual Employee_Savostianov CreateEmployee();
 	virtual void ShowInfo() const;
 
 	//template<class Archive>
-    std::shared_ptr<Employee> ReadFromFile(std::ifstream& fin);
+    std::shared_ptr<Employee_Savostianov> ReadFromFile(std::ifstream& fin);
 
 	//template<class Archive>
     virtual void WriteToFile(std::ofstream& fout) const;
@@ -58,13 +62,13 @@ public:
 };
 
 
-class Manager : public Employee {
+class Manager_Savostianov : public Employee_Savostianov {
 	friend class boost::serialization::access;
 private:
 	template<class Archive>
 	void serialize(Archive& ar, const unsigned int version)
 	{
-		ar& boost::serialization::base_object<Employee>(*this);
+        ar& boost::serialization::base_object<Employee_Savostianov>(*this);
 		ar& department;
 		ar& employees_num;
 	}
@@ -74,13 +78,13 @@ private:
 
 public:
 
-    Manager(int employeeID = -1, std::string name = "", std::string surname = "", int salary = 0, std::string department = "", int employees_num = 0) :
-		Employee(employeeID, name, surname, salary) {
+    Manager_Savostianov(int employeeID = -1, std::string name = "", std::string surname = "", int salary = 0, std::string department = "", int employees_num = 0) :
+        Employee_Savostianov(employeeID, name, surname, salary) {
 		this->department = department;
 		this->employees_num = employees_num;
 	}
 
-	Manager CreateManager();
+    Manager_Savostianov CreateManager();
 	void ShowInfo() const;
     void setDepartment(std::string dep) { department = dep; }
 	void setEmpnum(int emp_num) { employees_num = emp_num; }
@@ -89,5 +93,7 @@ public:
 	double getEmpnum() const { return employees_num; }
 
     void WriteToFile(std::ofstream& fout) const;
-    std::shared_ptr<Manager> ReadFromFile(std::ifstream& fin);
+    std::shared_ptr<Manager_Savostianov> ReadFromFile(std::ifstream& fin);
 };
+
+#endif

@@ -59,10 +59,8 @@ void Department::saveToFile() {
     }
     ofstream fout(file_name, ios::out);
     if (fout.is_open()) {
-        for (const auto& employee : employees) {
-            employee->WriteToFile(fout);
-        }
-        fout.close();
+        boost::archive::text_oarchive oa(fout);
+        oa << employees;
     }
     else {
         cout << "Открыть файл не удалось." << endl;
@@ -88,30 +86,8 @@ void Department::loadFromFile() {
     }
 
     if (fin.is_open()) {
-        clearEmployees();
-
-
-        while (fin.peek() != EOF) {
-            try {
-                /*boost::archive::text_iarchive ia(fin);*/
-                //shared_ptr<Manager> new_ptr = Manager().ReadFromFile(ia);
-                streampos current_pos = fin.tellg();
-                shared_ptr<Employee> new_ptr = Employee().ReadFromFile(fin);
-                if (new_ptr->getName() == "") {
-                    fin.seekg(current_pos);
-                    shared_ptr<Manager> mng_ptr = Manager().ReadFromFile(fin);
-                    employees.push_back(mng_ptr);
-                }
-                
-
-                if (new_ptr->getName() != "") {
-                        employees.push_back(new_ptr);
-                }
-            }
-            catch (boost::archive::archive_exception& ex) {
-                break;
-            }
-        }
+        boost::archive::text_iarchive ia(fin);
+        ia >> employees;
 
         fin.close();
     }

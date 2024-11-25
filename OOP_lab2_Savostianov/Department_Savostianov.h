@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include "Employee_Savostianov.h"
+#include <boost/serialization/vector.hpp>
 
 using namespace std;
 

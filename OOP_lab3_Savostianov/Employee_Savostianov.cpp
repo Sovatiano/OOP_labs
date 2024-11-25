@@ -2,12 +2,13 @@
 #include "BooleanFuncs.h"
 #include <vector>
 #include <sstream>
+#include <iostream>
 
-BOOST_CLASS_EXPORT(Manager)
-BOOST_CLASS_EXPORT(Employee)
+BOOST_CLASS_EXPORT(Manager_Savostianov)
+BOOST_CLASS_EXPORT(Employee_Savostianov)
 
 
-Employee Employee::CreateEmployee() {
+Employee_Savostianov Employee_Savostianov::CreateEmployee() {
     std::string employeeID;
     std::string name;
     std::string surname;
@@ -43,7 +44,7 @@ Employee Employee::CreateEmployee() {
         }
     }
 
-    Employee new_employee(0, "", "", 0);
+    Employee_Savostianov new_employee(0, "", "", 0);
     new_employee.setEmployeeID(stoi(employeeID));
     new_employee.setName(name);
     new_employee.setSurname(surname);
@@ -53,7 +54,7 @@ Employee Employee::CreateEmployee() {
 }
 
 
-void Employee::ShowInfo() const {
+void Employee_Savostianov::ShowInfo() const {
     std::cout << "ID: " << employeeID << ", "
          << "Имя: " << name << ", "
          << "Фамилия: " << surname << ", "
@@ -75,26 +76,26 @@ std::vector<std::string> split(const std::string& s, char delim) {
 
 
 //template<class Archive>
-std::shared_ptr<Employee> Employee::ReadFromFile(std::ifstream& fin) {
+std::shared_ptr<Employee_Savostianov> Employee_Savostianov::ReadFromFile(std::ifstream& fin) {
     boost::archive::text_iarchive ia(fin);
-    std::shared_ptr<Employee> new_ptr;
+    std::shared_ptr<Employee_Savostianov> new_ptr;
     ia >> new_ptr;
     return new_ptr;
 }
 
 
 //template<class Archive>
-void Employee::WriteToFile(std::ofstream& fout) const {
-    std::shared_ptr<Employee> new_ptr{ std::make_shared<Employee>(*this) };
+void Employee_Savostianov::WriteToFile(std::ofstream& fout) const {
+    std::shared_ptr<Employee_Savostianov> new_ptr{ std::make_shared<Employee_Savostianov>(*this) };
     boost::archive::text_oarchive oa(fout);
     oa << new_ptr;
 }
 
 
-Manager Manager::CreateManager() {
+Manager_Savostianov Manager_Savostianov::CreateManager() {
     std::string department;
     std::string employees_num;
-    Employee new_emp = Employee::CreateEmployee();
+    Employee_Savostianov new_emp = Employee_Savostianov::CreateEmployee();
 
     std::cout << "Введите название отдела, в котром работает менеджер: ";
     getline(std::cin, department);
@@ -110,7 +111,7 @@ Manager Manager::CreateManager() {
         }
     }
 
-    Manager new_manager;
+    Manager_Savostianov new_manager;
     new_manager.setEmployeeID(new_emp.getEmployeeID());
     new_manager.setName(new_emp.getName());
     new_manager.setSurname(new_emp.getSurname());
@@ -121,21 +122,21 @@ Manager Manager::CreateManager() {
     return new_manager;
 }
 
-void Manager::ShowInfo() const {
-    Employee::ShowInfo();
+void Manager_Savostianov::ShowInfo() const {
+    Employee_Savostianov::ShowInfo();
     std::cout << "Отдел: " << department << ", "
          << "Количество подчинённых: " << employees_num << std::endl;
 }
 
-void Manager::WriteToFile(std::ofstream& fout) const {
-    std::shared_ptr<Manager> new_ptr{ std::make_shared<Manager>(*this) };
+void Manager_Savostianov::WriteToFile(std::ofstream& fout) const {
+    std::shared_ptr<Manager_Savostianov> new_ptr{ std::make_shared<Manager_Savostianov>(*this) };
     boost::archive::text_oarchive oa(fout);
     oa << new_ptr;
 }
 
-std::shared_ptr<Manager> Manager::ReadFromFile(std::ifstream& fin) {
+std::shared_ptr<Manager_Savostianov> Manager_Savostianov::ReadFromFile(std::ifstream& fin) {
     boost::archive::text_iarchive ia(fin);
-    std::shared_ptr<Manager> new_ptr;
+    std::shared_ptr<Manager_Savostianov> new_ptr;
     ia >> new_ptr;
     return new_ptr;
 }

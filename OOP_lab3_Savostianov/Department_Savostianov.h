@@ -1,28 +1,32 @@
+#ifndef DEPARTMENT_SAVOSTIANOV_H
+#define DEPARTMENT_SAVOSTIANOV_H
 #pragma once
-#include <iostream>
 #include <vector>
-#include <fstream>
-#include <string>
+#include <boost/serialization/vector.hpp>
 #include "Employee_Savostianov.h"
+#include <QTableWidget>
+#include <QPainter>
+#include <QHeaderView>
+#include <memory>
+#include <vector>
 
 
-class Department {
+class Department_Savostianov {
 private:
-    std::vector<std::shared_ptr<Employee>> employees;
     friend class boost::serialization::access;
 
     template<class Archive>
-    void serialize(Archive& ar, const unsigned int version)
-    {
-        for (const auto& employee : employees)
-            ar& employee;
+    void serialize(Archive& ar, const unsigned int version) {
+        ar & employees;
     }
 
 public:
 
-    ~Department() {
+    ~Department_Savostianov() {
         clearEmployees();
     }
+
+    std::vector<std::shared_ptr<Employee_Savostianov>> employees;
 
     void addEmployee(bool is_manager);
 
@@ -30,9 +34,15 @@ public:
 
     void clearEmployees();
 
-    void saveToFile();
+    void saveToFile(std::string file_name);
 
-    void loadFromFile();
+    void loadFromFile(std::string file_name);
 
-    void showEmployees() const;
+    void showEmployees(QTableWidget* table);
+
+    void extracted(std::shared_ptr<Employee_Savostianov> &new_ptr);
+    void fillTest();
 };
+
+
+#endif
