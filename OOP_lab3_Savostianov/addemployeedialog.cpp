@@ -12,6 +12,9 @@ addemployeedialog::addemployeedialog(QWidget *parent)
     ui->departmentLabel->setVisible(false);
     ui->departmentEdit->setVisible(false);
 
+    connect(ui->buttonBox_2, &QDialogButtonBox::accepted, this, &QDialog::accept);
+    connect(ui->buttonBox_2, &QDialogButtonBox::rejected, this, &QDialog::reject);
+
     // Показываем/прячем поле для числа подчинённых в зависимости от типа сотрудника
     connect(ui->isManager, &QCheckBox::toggled, this, [this](bool checked) {
         ui->empNumLabel->setVisible(checked);
@@ -53,10 +56,3 @@ QString addemployeedialog::getDepartment() const {
 int addemployeedialog::getEmpNum() const {
     return ui->empNumBox->value();
 }
-
-void addemployeedialog::on_buttonBox_2_accepted()
-{
-    connect(ui->buttonBox_2, &QDialogButtonBox::accepted, this, &QDialog::accept);
-    connect(ui->buttonBox_2, &QDialogButtonBox::rejected, this, &QDialog::reject);
-}
-

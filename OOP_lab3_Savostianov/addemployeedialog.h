@@ -23,9 +23,6 @@ public:
     QString getDepartment() const;
     int getEmpNum() const;
 
-private slots:
-    void on_buttonBox_2_accepted();
-
 private:
     Ui::addemployeedialog *ui;
 };

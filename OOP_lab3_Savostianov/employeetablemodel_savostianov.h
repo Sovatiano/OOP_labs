@@ -21,6 +21,20 @@ public:
 
     bool removeRows(int row, int count, const QModelIndex &parent) override;
 
+    void addEmployee(const std::shared_ptr<Employee_Savostianov> &employee) {
+        int row = employees.size();
+        beginInsertRows(QModelIndex(), row, row);  // Уведомляем о вставке строки
+        employees.push_back(employee);             // Добавляем в вектор
+        endInsertRows();                           // Завершаем вставку строки
+    }
+
+    void fillTable(EmployeeTableModel_Savostianov* model, const std::vector<std::shared_ptr<Employee_Savostianov>>& employeeList) {
+        std::for_each(employeeList.begin(), employeeList.end(),
+                      std::bind(&EmployeeTableModel_Savostianov::addEmployee, model, std::placeholders::_1));
+    }
+
+
+
 private:
     std::vector<std::shared_ptr<Employee_Savostianov>> employees; // Хранилище данных
 };

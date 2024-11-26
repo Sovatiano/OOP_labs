@@ -23,6 +23,10 @@ public:
 
     void setDepartmentData(Department_Savostianov* data);
 
+    void updateTable(std::vector<std::shared_ptr<Employee_Savostianov>>);
+
+    void updateRowCount();
+
 private slots:
     void on_addEmployeeButton_clicked();
 

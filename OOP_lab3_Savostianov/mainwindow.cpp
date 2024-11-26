@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->tableView->setModel(employeeModel);
+    ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 }
 
 MainWindow::~MainWindow()
@@ -25,6 +26,19 @@ void MainWindow::setDepartmentData(Department_Savostianov* newDepartment) {
     if (newDepartment) {
         employeeModel->setEmployees(newDepartment->employees); // Передаём данные модели
     }
+}
+
+
+void MainWindow::updateTable(std::vector<std::shared_ptr<Employee_Savostianov>>) {
+    employeeModel->fillTable(employeeModel, department->employees);
+    ui->tableView->setModel(employeeModel);
+    ui->tableView->resizeColumnsToContents();
+    updateRowCount();
+}
+
+void MainWindow::updateRowCount() {
+    int rowCount = employeeModel->rowCount();
+    ui->rowCountLabel->setText(QString("Количество строк: %1").arg(rowCount));
 }
 
 void MainWindow::on_addEmployeeButton_clicked()
@@ -44,8 +58,7 @@ void MainWindow::on_addEmployeeButton_clicked()
             department->employees.push_back(std::make_shared<Employee_Savostianov>(empID, name, surname, salary));
         }
 
-        // Обновляем таблицу
-        employeeModel->setEmployees(department->employees);
+        updateTable(department->employees);
     }
 }
 
@@ -58,7 +71,7 @@ void MainWindow::on_pushButton_3_clicked()
                                                     tr("Text Files (*.txt);;All Files (*)"));
 
     department->loadFromFile(fileName.toStdString());
-    employeeModel->setEmployees(department->employees);
+    updateTable(department->employees);
 }
 
 
@@ -76,19 +89,31 @@ void MainWindow::on_pushButton_4_clicked()
 void MainWindow::on_pushButton_5_clicked()
 {
     department->clearEmployees();
-    employeeModel->setEmployees(department->employees);
+    updateTable(department->employees);
 }
 
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    QModelIndex currentIndex = ui->tableView->currentIndex();
+    QItemSelectionModel *selectionModel = ui->tableView->selectionModel();
+    QModelIndexList selectedRows = selectionModel->selectedRows(); // Только индексы строк
 
-    if (!currentIndex.isValid()) {
-        QMessageBox::warning(this, "Ошибка", "Выберите строку для удаления.");
+    if (selectedRows.empty()) {
+        QMessageBox::warning(this, "Ошибка", "Выберите строки для удаления.");
         return;
     }
 
-    employeeModel->removeRows(currentIndex.row(), 1, QModelIndex());
+    // Сортируем индексы в обратном порядке, чтобы не нарушать последовательность при удалении
+    std::sort(selectedRows.begin(), selectedRows.end(), [](const QModelIndex &a, const QModelIndex &b) {
+        return a.row() > b.row();
+    });
+
+    // Удаляем строки из модели
+    for (const QModelIndex &index : selectedRows) {
+        employeeModel->removeRows(index.row(), 1, QModelIndex());
+    }
+    ui->tableView->setModel(employeeModel);
+    ui->tableView->resizeColumnsToContents();
+    updateRowCount();
 }
 
