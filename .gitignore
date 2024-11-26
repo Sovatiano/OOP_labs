@@ -68,6 +68,7 @@ target_wrapper.*
 *.qmlproject.user
 *.qmlproject.user.*
 
+OOP_lab3_laptop/
 # QtCreator CMake
 CMakeLists.txt.user*
 
