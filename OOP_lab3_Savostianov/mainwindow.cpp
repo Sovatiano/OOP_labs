@@ -22,10 +22,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::setDepartmentData(Department_Savostianov* newDepartment) {
     this->department = newDepartment;
-
-    if (newDepartment) {
-        employeeModel->setEmployees(newDepartment->employees); // Передаём данные модели
-    }
 }
 
 

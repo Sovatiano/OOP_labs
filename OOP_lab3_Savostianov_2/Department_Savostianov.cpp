@@ -52,7 +52,6 @@ void Department_Savostianov::clearEmployees() {
 void Department_Savostianov::saveToFile(std::string file_name) {
     std::ofstream ofs(file_name);
     boost::archive::text_oarchive oa(ofs);
-    ofs.close();
     oa << employees;
 }
 
@@ -65,14 +64,14 @@ void Department_Savostianov::loadFromFile(std::string file_name) {
 
 
 void Department_Savostianov::fillTest() {
-    // std::shared_ptr<Employee_Savostianov> new_ptr{ std::make_shared<Employee_Savostianov>(Employee_Savostianov(1, "Сергей", "Сергеев", 20000)) };
-    // employees.push_back(new_ptr);
-    // std::shared_ptr<Employee_Savostianov> new_ptr2{ std::make_shared<Employee_Savostianov>(Employee_Savostianov(2, "Антон", "Антонов", 30000)) };
-    // employees.push_back(new_ptr2);
-    // std::shared_ptr<Employee_Savostianov> new_ptr3{ std::make_shared<Employee_Savostianov>(Employee_Savostianov(3, "Пётр", "Петров", 40000)) };
-    // employees.push_back(new_ptr3);
-    // std::shared_ptr<Manager_Savostianov> new_ptr4{ std::make_shared<Manager_Savostianov>(Manager_Savostianov(4, "Иван", "Юрьевич", 50000, "Экономический", 3))};
-    // employees.push_back(new_ptr4);
+    std::shared_ptr<Employee_Savostianov> new_ptr{ std::make_shared<Employee_Savostianov>(Employee_Savostianov(1, "Сергей", "Сергеев", 20000)) };
+    employees.push_back(new_ptr);
+    std::shared_ptr<Employee_Savostianov> new_ptr2{ std::make_shared<Employee_Savostianov>(Employee_Savostianov(2, "Антон", "Антонов", 30000)) };
+    employees.push_back(new_ptr2);
+    std::shared_ptr<Employee_Savostianov> new_ptr3{ std::make_shared<Employee_Savostianov>(Employee_Savostianov(3, "Пётр", "Петров", 40000)) };
+    employees.push_back(new_ptr3);
+    std::shared_ptr<Manager_Savostianov> new_ptr4{ std::make_shared<Manager_Savostianov>(Manager_Savostianov(4, "Иван", "Юрьевич", 50000, "Экономический", 3))};
+    employees.push_back(new_ptr4);
 }
 
 

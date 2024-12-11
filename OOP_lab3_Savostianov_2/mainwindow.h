@@ -26,6 +26,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void updateTable(std::vector<std::shared_ptr<Employee_Savostianov>>);
+    void setDepartmentData(Department_Savostianov* newDepartment);
 
 private:
     Ui::MainWindow *ui;
