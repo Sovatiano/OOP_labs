@@ -91,6 +91,47 @@ void Employee_Savostianov::WriteToFile(std::ofstream& fout) const {
     oa << new_ptr;
 }
 
+void Employee_Savostianov::draw(QPainter& painter, int x, int y, std::vector<int> columnWidths, int cellHeight) const {
+    QString idText = QString::number(employeeID);
+    QString nameText = QString::fromStdString(name);
+    QString surnameText = QString::fromStdString(surname);
+    QString salaryText = QString::number(salary);
+
+    painter.setPen(Qt::black);
+
+    painter.drawRect(x, y, columnWidths[0] + 20, cellHeight);
+    painter.drawText(QRect(x + 5, y, columnWidths[0], cellHeight), Qt::AlignCenter, idText);
+    x += columnWidths[0] + 20;
+    painter.drawRect(x, y, columnWidths[1] + 20, cellHeight);
+    painter.drawText(QRect(x + 5, y, columnWidths[1], cellHeight), Qt::AlignLeft, nameText);
+    x += columnWidths[1] + 20;
+    painter.drawRect(x, y, columnWidths[2] + 20, cellHeight);
+    painter.drawText(QRect(x + 5, y, columnWidths[2], cellHeight), Qt::AlignLeft, surnameText);
+    x += columnWidths[2] + 20;
+    painter.drawRect(x, y, columnWidths[3] + 20, cellHeight);
+    painter.drawText(QRect(x + 5, y, columnWidths[3], cellHeight), Qt::AlignRight, salaryText);
+    x += columnWidths[3] + 20;
+    painter.drawRect(x, y, columnWidths[4] + 20, cellHeight);
+    x += columnWidths[4] + 20;
+    painter.drawRect(x, y, columnWidths[5] + 20, cellHeight);
+}
+
+QSize Employee_Savostianov::getTextBlockSize(QPainter& painter) const {
+    QString nameText = QString::fromStdString(name);
+    QString surnameText = QString::fromStdString(surname);
+    QString salaryText = QString::number(salary);
+
+    QRect nameRect = painter.boundingRect(QRect(0, 0, 0, 0), Qt::AlignLeft, nameText);
+    QRect surnameRect = painter.boundingRect(QRect(0, 0, 0, 0), Qt::AlignLeft, surnameText);
+    QRect salaryRect = painter.boundingRect(QRect(0, 0, 0, 0), Qt::AlignRight, salaryText);
+
+    int width = nameRect.width() + surnameRect.width() + salaryRect.width();
+    int height = std::max({ nameRect.height(), surnameRect.height(), salaryRect.height() });
+
+    return QSize(width, height);
+}
+
+
 
 Manager_Savostianov Manager_Savostianov::CreateManager() {
     std::string department;
@@ -139,4 +180,35 @@ std::shared_ptr<Manager_Savostianov> Manager_Savostianov::ReadFromFile(std::ifst
     std::shared_ptr<Manager_Savostianov> new_ptr;
     ia >> new_ptr;
     return new_ptr;
+}
+
+
+void Manager_Savostianov::draw(QPainter& painter, int x, int y, std::vector<int> columnWidths, int cellHeight) const {
+    // Сначала рисуем базовый класс (ID, имя, фамилия, зарплата)
+    Employee_Savostianov::draw(painter, x, y, columnWidths, cellHeight);
+
+    QString departmentText = QString::fromStdString(department);
+    QString employeesNumText = QString::number(employees_num);
+
+    x = columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3] + 80;
+    painter.drawRect(x, y, columnWidths[4] + 20, cellHeight);
+    painter.drawText(QRect(x + 5, y, columnWidths[4], cellHeight), Qt::AlignLeft, departmentText);
+    x += columnWidths[4] + 20;
+    painter.drawRect(x, y, columnWidths[5] + 20, cellHeight);
+    painter.drawText(QRect(x + 5, y, columnWidths[5], cellHeight), Qt::AlignLeft, employeesNumText);
+}
+
+QSize Manager_Savostianov::getTextBlockSize(QPainter& painter) const {
+    QSize baseSize = Employee_Savostianov::getTextBlockSize(painter);
+
+    QString departmentText = QString::fromStdString(department);
+    QString employeesNumText = QString::number(employees_num);
+
+    QRect departmentRect = painter.boundingRect(QRect(0, 0, 0, 0), Qt::AlignLeft, departmentText);
+    QRect employeesNumRect = painter.boundingRect(QRect(0, 0, 0, 0), Qt::AlignRight, employeesNumText);
+
+    int width = std::max(baseSize.width(), departmentRect.width() + employeesNumRect.width());
+    int height = baseSize.height() + std::max(departmentRect.height(), employeesNumRect.height());
+
+    return QSize(width, height);
 }

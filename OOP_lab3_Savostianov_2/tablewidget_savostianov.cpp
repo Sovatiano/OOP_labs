@@ -1,47 +1,75 @@
 #include "tablewidget_savostianov.h"
 
-void TableWidget_Savostianov::updateWidgetSize() {
-    if (department) {
-        int totalHeight = headerHeight + department->employees.size() * cellHeight;
-        setFixedSize(2 * cellWidth, totalHeight);
-    }
+TableWidget_Savostianov::TableWidget_Savostianov(Department_Savostianov* department, QWidget* parent)
+    : QWidget(parent), department(department) {
 }
 
 
-void TableWidget_Savostianov::paintEvent(QPaintEvent *event) {
+void TableWidget_Savostianov::paintEvent(QPaintEvent* event) {
     if (!department) return;
 
     QPainter painter(this);
-    const auto &items = department->employees;
+    int y = 0;
+    int x = 0;
+    int cellHeight = 40;
 
-    // Отрисовка заголовков
-    painter.setBrush(Qt::lightGray);
-    painter.drawRect(0, 0, width(), headerHeight);
-    painter.drawText(10, 20, "Name");
-    painter.drawText(cellWidth + 10, 20, "Value");
+    std::vector<int> columnWidths = department->getColumnWidths(painter);
 
-    // Отрисовка содержимого
-    int y = headerHeight;
-    for (size_t i = 0; i < items.size(); ++i) {
-        std::shared_ptr<Employee_Savostianov> item = items[i];
+    painter.setPen(Qt::black);
+    painter.setBrush(Qt::white);
 
-        // Чередование цвета строк
-        if (i % 2 == 0)
-            painter.setBrush(Qt::white);
-        else
-            painter.setBrush(Qt::lightGray);
+    painter.drawRect(x, y, columnWidths[0] + 20, cellHeight);
+    painter.drawText(QRect(x, y, columnWidths[0], cellHeight), Qt::AlignCenter, "ID");
+    x += columnWidths[0] + 20;
+    painter.drawRect(x, y, columnWidths[1] + 20, cellHeight);
+    painter.drawText(QRect(x, y, columnWidths[1], cellHeight), Qt::AlignCenter, "Имя");
+    x += columnWidths[1] + 20;
+    painter.drawRect(x, y, columnWidths[2 + 20], cellHeight);
+    painter.drawText(QRect(x, y, columnWidths[2], cellHeight), Qt::AlignCenter, "Фамилия");
+    x += columnWidths[2] + 20;
+    painter.drawRect(x, y, columnWidths[3] + 20, cellHeight);
+    painter.drawText(QRect(x, y, columnWidths[3], cellHeight), Qt::AlignCenter, "Зарплата");
+    x += columnWidths[3] + 20;
+    painter.drawRect(x, y, columnWidths[4] + 20, cellHeight);
+    painter.drawText(QRect(x, y, columnWidths[4], cellHeight), Qt::AlignCenter, "Отдел");
+    x += columnWidths[4] + 20;
+    painter.drawRect(x, y, columnWidths[5] + 20, cellHeight);
+    painter.drawText(QRect(x, y, columnWidths[5], cellHeight), Qt::AlignCenter, "Число подчинённых");
 
-        // Рисуем строку
-        painter.drawRect(0, y, width(), cellHeight);
-        painter.drawText(10, y + 20, QString::fromStdString(item->getName()));
-        painter.drawText(cellWidth + 10, y + 20, QString::number(item->getSalary()));
+    y += cellHeight;
+    x = 0;
 
-        y += cellHeight;
-    }
+    std::for_each(department->employees.begin(), department->employees.end(), [&painter, &y, &x, &columnWidths, &cellHeight](const std::shared_ptr<Employee_Savostianov>& item) {
+        item->draw(painter, x, y, columnWidths, cellHeight);
+        y += 40;
+    });
+
+    int table_width = std::accumulate(columnWidths.begin(), columnWidths.end(), 0) + 120;
+    painter.drawLine(table_width - 1, 0, table_width - 1, (department->employees.size() + 1) * cellHeight);
+    QSize sizeHint = QSize(columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3] + columnWidths[4] + columnWidths[5] + 120, y);
+    setFixedSize(sizeHint);
+}
+
+QSize TableWidget_Savostianov::sizeHint() const {
+    if (!department) return QSize(0, 0);
+
+    QPainter painter;
+    int totalHeight = 0;
+    int maxWidth = 0;
+    int cellHeight = 40;
+
+    // Получаем максимальный размер для каждого столбца
+    std::vector<int> columnWidths = department->getColumnWidths(painter);
+
+
+    maxWidth = columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3] + columnWidths[4] + columnWidths[5];
+    totalHeight = department->employees.size() * cellHeight + 40; // Включая заголовок
+
+    return QSize(maxWidth, totalHeight);
 }
 
 
-QSize TableWidget_Savostianov::sizeHint() const {
-    // Размер виджета зависит от количества элементов
-    return QSize(2 * cellWidth, headerHeight + department->employees.size() * cellHeight);
+void TableWidget_Savostianov::resizeEvent(QResizeEvent* event) {
+    QWidget::resizeEvent(event);
+    update(); // Перерисовать таблицу
 }

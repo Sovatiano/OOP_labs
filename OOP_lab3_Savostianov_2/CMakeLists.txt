@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(OOP_lab3_Savostianov_2 VERSION 0.1 LANGUAGES CXX)
+project(OOP_lab3_Savostianov VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -23,12 +23,18 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(OOP_lab3_Savostianov_2
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        BooleanFuncs.cpp Department_Savostianov.cpp Employee_Savostianov.cpp
         BooleanFuncs.h Department_Savostianov.h Employee_Savostianov.h
-        tablewidget_savostianov.h tablewidget_savostianov.cpp
+        Department_Savostianov.cpp Department_Savostianov.h Employee_Savostianov.cpp
+        BooleanFuncs.cpp tablewidget_savostianov.cpp tablewidget_savostianov.h
+
+
+
+
+
+
     )
 # Define target properties for Android with Qt 6 as:
-#    set_property(TARGET OOP_lab3_Savostianov_2 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+#    set_property(TARGET OOP_lab3_Savostianov APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
@@ -51,7 +57,7 @@ target_link_libraries(OOP_lab3_Savostianov_2 PRIVATE Qt${QT_VERSION_MAJOR}::Widg
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.OOP_lab3_Savostianov_2)
+  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.OOP_lab3_Savostianov)
 endif()
 set_target_properties(OOP_lab3_Savostianov_2 PROPERTIES
     ${BUNDLE_ID_OPTION}
@@ -79,9 +85,8 @@ set(Boost_NO_SYSTEM_PATHS FALSE)
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_STATIC_RUNTIME OFF)
 
-message("lol ${BOOST_INCLUDEDIR}")
-
 find_package(Boost REQUIRED COMPONENTS serialization wserialization)
+
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
     link_directories(${Boost_LIBRARY_DIRS})

@@ -1,5 +1,6 @@
 #ifndef EMPLOYEE_SAVOSTIANOV_H
 #define EMPLOYEE_SAVOSTIANOV_H
+#include <qpainter.h>
 #pragma once
 #include <string>
 #include <fstream>
@@ -48,6 +49,8 @@ public:
     void setName(const std::string& n) { name = n; }
     void setSurname(const std::string& s) { surname = s; }
 	void setSalary(int sal) { salary = sal; }
+    virtual void draw(QPainter& painter, int x, int y, std::vector<int> columnWidths, int cellHeight) const;
+    QSize getTextBlockSize(QPainter& painter) const;
 
     virtual Employee_Savostianov CreateEmployee();
 	virtual void ShowInfo() const;
@@ -94,6 +97,8 @@ public:
 
     void WriteToFile(std::ofstream& fout) const;
     std::shared_ptr<Manager_Savostianov> ReadFromFile(std::ifstream& fin);
+    void draw(QPainter& painter, int x, int y, std::vector<int> columnWidths, int cellHeight) const;
+    QSize getTextBlockSize(QPainter& painter) const;
 };
 
 #endif

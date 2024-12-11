@@ -42,6 +42,7 @@ public:
 
     void extracted(std::shared_ptr<Employee_Savostianov> &new_ptr);
     void fillTest();
+    std::vector<int> getColumnWidths(QPainter& painter);
 };
 
 
