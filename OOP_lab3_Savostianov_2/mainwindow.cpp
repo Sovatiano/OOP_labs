@@ -6,8 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    Department_Savostianov* department = new Department_Savostianov;
-    department->fillTest();
+    Department_Savostianov* dep = new Department_Savostianov;
+    setDepartmentData(dep);
 
     QTabWidget *tabWidget = new QTabWidget(this);
 
@@ -45,6 +45,10 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::setDepartmentData(Department_Savostianov* newDepartment) {
+    this->department = newDepartment;
 }
 
 
