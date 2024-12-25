@@ -29,17 +29,12 @@ void MainWindow::updateTable(std::vector<std::shared_ptr<Employee_Savostianov>>)
     employeeModel->fillTable(employeeModel, department->employees);
     ui->tableView->setModel(employeeModel);
     ui->tableView->resizeColumnsToContents();
-    updateRowCount();
-}
-
-void MainWindow::updateRowCount() {
-    int rowCount = employeeModel->rowCount();
-    ui->rowCountLabel->setText(QString("Количество строк: %1").arg(rowCount));
 }
 
 void MainWindow::on_addEmployeeButton_clicked()
 {
-    addemployeedialog dialog(this);
+    EmployeeTableModel_Savostianov* model_ptr = employeeModel;
+    addemployeedialog dialog(department, model_ptr, this);
     if (dialog.exec() == QDialog::Accepted) {
         int empID = dialog.getId();
         std::string name = dialog.getName().toStdString();
@@ -56,6 +51,7 @@ void MainWindow::on_addEmployeeButton_clicked()
 
         updateTable(department->employees);
     }
+    updateTable(department->employees);
 }
 
 
@@ -110,6 +106,5 @@ void MainWindow::on_pushButton_2_clicked()
     }
     ui->tableView->setModel(employeeModel);
     ui->tableView->resizeColumnsToContents();
-    updateRowCount();
 }
 

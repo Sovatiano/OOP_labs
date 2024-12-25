@@ -6,34 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>482</width>
-    <height>300</height>
+    <width>1246</width>
+    <height>571</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox_2">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>260</y>
-     <width>341</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Orientation::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
-   </property>
-  </widget>
   <widget class="QWidget" name="verticalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>0</y>
+     <x>1050</x>
+     <y>10</y>
      <width>181</width>
      <height>251</height>
     </rect>
@@ -77,8 +61,8 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>0</y>
+     <x>810</x>
+     <y>10</y>
      <width>231</width>
      <height>141</height>
     </rect>
@@ -87,28 +71,28 @@
     <item>
      <widget class="QLabel" name="idLabel">
       <property name="text">
-       <string>Ввндите ID нового сотрудника:</string>
+       <string> ID сотрудника:</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="nameLabel">
       <property name="text">
-       <string>Введите имя нового сотрудника:</string>
+       <string>Имя сотрудника:</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="surnameLabel">
       <property name="text">
-       <string>Введите фамилию нового сотрудника:</string>
+       <string>Фамилия сотрудника:</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="salaryLabel">
       <property name="text">
-       <string>Введите зарплату нового сотрудника:</string>
+       <string>Зарплата сотрудника:</string>
       </property>
      </widget>
     </item>
@@ -117,8 +101,8 @@
   <widget class="QWidget" name="verticalLayoutWidget_3">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>170</y>
+     <x>760</x>
+     <y>180</y>
      <width>277</width>
      <height>80</height>
     </rect>
@@ -139,6 +123,55 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="addButton">
+   <property name="geometry">
+    <rect>
+     <x>1110</x>
+     <y>270</y>
+     <width>121</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Добавить</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="editButton">
+   <property name="geometry">
+    <rect>
+     <x>1110</x>
+     <y>320</y>
+     <width>121</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Редактировать</string>
+   </property>
+  </widget>
+  <widget class="QTableView" name="tableView">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>731</width>
+     <height>541</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="removeButton">
+   <property name="geometry">
+    <rect>
+     <x>1110</x>
+     <y>370</y>
+     <width>121</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Удалить</string>
+   </property>
   </widget>
  </widget>
  <resources/>

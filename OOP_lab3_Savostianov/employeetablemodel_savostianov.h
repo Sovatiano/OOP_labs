@@ -28,7 +28,12 @@ public:
         endInsertRows();                           // Завершаем вставку строки
     }
 
+    void clearTable() {
+        employees.clear();
+    }
+
     void fillTable(EmployeeTableModel_Savostianov* model, const std::vector<std::shared_ptr<Employee_Savostianov>>& employeeList) {
+        employees.clear();
         std::for_each(employeeList.begin(), employeeList.end(),
                       std::bind(&EmployeeTableModel_Savostianov::addEmployee, model, std::placeholders::_1));
     }

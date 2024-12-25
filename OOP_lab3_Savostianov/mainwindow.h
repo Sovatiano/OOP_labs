@@ -26,6 +26,7 @@ public:
     void updateTable(std::vector<std::shared_ptr<Employee_Savostianov>>);
 
     void updateRowCount();
+    Department_Savostianov* department = nullptr;
 
 private slots:
     void on_addEmployeeButton_clicked();
@@ -40,7 +41,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    Department_Savostianov* department = nullptr;
     EmployeeTableModel_Savostianov* employeeModel;
     void onAddEmployeeButtonClicked();
 };
