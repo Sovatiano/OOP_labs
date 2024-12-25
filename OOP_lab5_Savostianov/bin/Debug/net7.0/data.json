@@ -21,5 +21,12 @@
     "Name": "\u041F\u0451\u0442\u0440",
     "Surname": "\u041F\u0435\u0442\u0440\u043E\u0432",
     "Salary": 70000
+  },
+  {
+    "$type": "employee",
+    "EmployeeID": 4,
+    "Name": "\u0410\u0440\u0442\u0451\u043C",
+    "Surname": "\u0410\u0440\u0442\u0451\u043C\u043E\u0432",
+    "Salary": 65000
   }
 ]
